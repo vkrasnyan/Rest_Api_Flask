@@ -1,0 +1,321 @@
+{
+  "definitions": {
+    "Author": {
+      "properties": {
+        "author_id": {
+          "type": "integer"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "middle_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "first_name",
+        "last_name"
+      ],
+      "type": "object"
+    },
+    "Book": {
+      "properties": {
+        "author": {
+          "$ref": "#/definitions/Author"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "author",
+        "title"
+      ],
+      "type": "object"
+    }
+  },
+  "info": {
+    "title": "BookList API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/authors": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List of authors",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Author"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "An endpoint that lists authors",
+        "tags": [
+          "authors"
+        ]
+      },
+      "post": {
+        "description": "    ",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "new author params",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The author has been created",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "400": {
+            "description": "No input data provided"
+          }
+        },
+        "summary": "An endpoint that creates a new author",
+        "tags": [
+          "authors"
+        ]
+      }
+    },
+    "/api/authors/{author_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "The author id",
+            "in": "path",
+            "name": "author_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The author has been deleted",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Author"
+              },
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Author not found"
+          }
+        },
+        "summary": "An endpoint that deletes an author by id",
+        "tags": [
+          "authors"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "The author id",
+            "in": "path",
+            "name": "author_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The author has been retrieved",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Author"
+              },
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Author not found"
+          }
+        },
+        "summary": "An endpoint that retrieves an author by id",
+        "tags": [
+          "authors"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "updated author params",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The author has been updated",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "400": {
+            "description": "No input data provided"
+          },
+          "404": {
+            "description": "Author not found"
+          },
+          "422": {
+            "description": "The author could not be updated"
+          }
+        },
+        "summary": "An endpoint that updates an author",
+        "tags": [
+          "authors"
+        ]
+      }
+    },
+    "/api/books": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List of books",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Book"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "An endpoint that lists books",
+        "tags": [
+          "books"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "new book params",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The book has been created",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "400": {
+            "description": "No input data provided"
+          },
+          "422": {
+            "description": "The book could not be created"
+          }
+        },
+        "summary": "An endpoint that creates a new book",
+        "tags": [
+          "books"
+        ]
+      }
+    },
+    "/api/books/{book_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "The book id",
+            "in": "path",
+            "name": "book_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The book has been deleted",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Book"
+              },
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        },
+        "summary": "An endpoint that deletes a book",
+        "tags": [
+          "books"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "The book id",
+            "in": "path",
+            "name": "book_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The book has been retrieved",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Book"
+              },
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        },
+        "summary": "An endpoint that retrieves a book by id",
+        "tags": [
+          "books"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "updated book params",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The book has been updated",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "400": {
+            "description": "No input data provided"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "422": {
+            "description": "The book could not be updated"
+          }
+        },
+        "summary": "An endpoint that updates a book",
+        "tags": [
+          "books"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0"
+}
